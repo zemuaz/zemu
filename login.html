@@ -17,27 +17,38 @@
       font-family: Arial, sans-serif;
       background: #f5f5f5;
       min-height: 100vh;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       padding: 20px;
     }
 
     .box {
       width: 100%;
       max-width: 400px;
+
       background: white;
+
       padding: 35px;
+
       border-radius: 18px;
-      box-shadow: 0 5px 25px rgba(0,0,0,.1);
+
+      box-shadow:
+        0 5px 25px rgba(0,0,0,.1);
+
       text-align: center;
     }
 
     .logo {
       color: #ff4d00;
-      font-size: 34px;
+
+      font-size: 36px;
+
       font-weight: bold;
-      margin-bottom: 15px;
+
+      margin-bottom: 12px;
     }
 
     h2 {
@@ -46,12 +57,21 @@
 
     .google-btn {
       width: 100%;
+
       padding: 15px;
+
       border: 1px solid #ddd;
+
       border-radius: 9px;
+
       background: white;
+
+      color: #222;
+
       font-size: 16px;
+
       font-weight: bold;
+
       cursor: pointer;
     }
 
@@ -60,81 +80,123 @@
     }
 
     #message {
-      margin-top: 15px;
+      margin-top: 18px;
+
       color: #d33;
+
+      font-size: 14px;
     }
   </style>
+
 </head>
+
 
 <body>
 
-<div class="box">
 
-  <div class="logo">
-    Zemu.az
+  <div class="box">
+
+    <div class="logo">
+      Zemu.az
+    </div>
+
+
+    <h2>
+      Zemu.az-a xoş gəlmisiniz
+    </h2>
+
+
+    <p>
+      Alış-verişə başlamaq üçün Google hesabınızla daxil olun.
+    </p>
+
+
+    <button
+      id="googleLogin"
+      class="google-btn"
+    >
+      🌐 Google ilə daxil ol
+    </button>
+
+
+    <div id="message"></div>
+
   </div>
 
-  <h2>
-    Zemu.az-a daxil ol
-  </h2>
-
-  <button
-    id="googleLogin"
-    class="google-btn"
-  >
-    🌐 Google ilə daxil ol
-  </button>
-
-  <div id="message"></div>
-
-</div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- SUPABASE -->
 
-<script>
-
-const supabaseClient =
-  window.supabase.createClient(
-    "https://cpwlypwlraeudehaookn.supabase.co",
-    "sb_publishable_BaxB73FACTL2Sht9ob0ywg_qulL8OPE"
-  );
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
 
 
-document
-  .getElementById("googleLogin")
-  .addEventListener("click", async function () {
+  <script>
 
-    const message =
-      document.getElementById("message");
-
-    message.textContent =
-      "Google açılır...";
+    const SUPABASE_URL =
+      "https://cpwlypwlraeudehaookn.supabase.co";
 
 
-    const { error } =
-      await supabaseClient.auth.signInWithOAuth({
+    const SUPABASE_KEY =
+      "sb_publishable_BaxB73FACTL2Sht9ob0ywg_qulL8OPE";
 
-        provider: "google",
 
-        options: {
-          redirectTo:
-            window.location.origin + "/index.html"
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    document
+      .getElementById("googleLogin")
+      .addEventListener(
+        "click",
+        async function () {
+
+
+          const message =
+            document.getElementById("message");
+
+
+          message.textContent =
+            "Google hesabı açılır...";
+
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient.auth.signInWithOAuth({
+
+              provider: "google",
+
+              options: {
+
+                redirectTo:
+                  "https://zemuaz.github.io/zemu/index.html"
+
+              }
+
+            });
+
+
+          if (error) {
+
+            console.error(error);
+
+            message.textContent =
+              "Xəta: " + error.message;
+
+          }
+
         }
+      );
 
-      });
+  </script>
 
-
-    if (error) {
-
-      message.textContent =
-        "Xəta: " + error.message;
-
-    }
-
-  });
-
-</script>
 
 </body>
+
 </html>
