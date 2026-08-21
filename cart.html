@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zemu.az - Səbət</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="simple-header">
+  <button onclick="history.back()">←</button>
+  <h2>🛒 Səbətim</h2>
+</header>
+
+<main class="page">
+
+  <div id="cartItems">
+    Səbət yüklənir...
+  </div>
+
+  <div class="total-box">
+    <b>Cəmi:</b>
+    <span id="total">0.00 AZN</span>
+  </div>
+
+  <button class="main-button">
+    Sifarişi rəsmiləşdir
+  </button>
+
+</main>
+
+<script>
+
+let cart = JSON.parse(
+  localStorage.getItem("zemu_cart") || "[]"
+);
+
+const container =
+  document.getElementById("cartItems");
+
+const totalElement =
+  document.getElementById("total");
+
+let total = 0;
+
+if (cart.length === 0) {
+
+  container.innerHTML =
+    "<p>Səbətiniz boşdur.</p>";
+
+} else {
+
+  container.innerHTML = "";
+
+  cart.forEach(function(item, index) {
+
+    total += Number(item.price);
+
+    const div =
+      document.createElement("div");
+
+    div.className = "cart-item";
+
+    div.innerHTML = `
+      <div>
+        <b>${item.name}</b>
+        <p>${Number(item.price).toFixed(2)} AZN</p>
+      </div>
+
+      <button
+        onclick="removeItem(${index})"
+      >
+        Sil
+      </button>
+    `;
+
+    container.appendChild(div);
+
+  });
+
+}
+
+totalElement.textContent =
+  total.toFixed(2) + " AZN";
+
+
+function removeItem(index) {
+
+  cart.splice(index, 1);
+
+  localStorage.setItem(
+    "zemu_cart",
+    JSON.stringify(cart)
+  );
+
+  location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
