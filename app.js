@@ -1,83 +1,86 @@
-// Zemu.az - Supabase bağlantısı
-
-const SUPABASE_URL = "https://cpwlypwlraeudehaookn.supabase.co";
+const SUPABASE_URL =
+  "https://cpwlypwlraeudehaookn.supabase.co";
 
 const SUPABASE_KEY =
   "sb_publishable_BaxB73FACTL2Sht9ob0ywg_qulL8OPE";
 
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
-// ==========================
-// MƏHSULLARI GƏTİR
-// ==========================
+let cart =
+  JSON.parse(
+    localStorage.getItem("zemu_cart") || "[]"
+  );
+
 
 async function loadProducts() {
 
-  const productsContainer =
-    document.querySelector(".products");
+  const container =
+    document.getElementById("products");
 
-  if (!productsContainer) return;
+  container.innerHTML =
+    "<p class='loading'>Məhsullar yüklənir...</p>";
 
-  productsContainer.innerHTML =
-    "<p>Məhsullar yüklənir...</p>";
 
-  const { data, error } = await supabaseClient
-    .from("products")
-    .select("*")
-    .order("id", { ascending: false });
+  const { data, error } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .order("id", {
+        ascending: false
+      });
+
 
   if (error) {
 
-    console.error("Supabase xətası:", error);
+    console.error(error);
 
-    productsContainer.innerHTML =
-      "<p>Məhsullar yüklənərkən xəta baş verdi.</p>";
+    container.innerHTML =
+      "<p>Məhsullar yüklənmədi.</p>";
 
     return;
   }
+
 
   if (!data || data.length === 0) {
 
-    productsContainer.innerHTML =
-      "<p>Hələ məhsul yoxdur.</p>";
+    container.innerHTML =
+      "<p>Hələ məhsul əlavə edilməyib.</p>";
 
     return;
   }
 
-  productsContainer.innerHTML = "";
+
+  container.innerHTML = "";
+
 
   data.forEach(product => {
 
-    const card = document.createElement("div");
+    const card =
+      document.createElement("div");
 
     card.className = "product";
+
+
+    const image =
+      product.image
+        ? `<img src="${product.image}" alt="${product.name}">`
+        : `<span style="font-size:60px;">🛍️</span>`;
+
 
     card.innerHTML = `
 
       <div class="product-image">
-
-        ${
-          product.image
-            ? `<img
-                src="${product.image}"
-                alt="${product.name}"
-                style="
-                  width:100%;
-                  height:100%;
-                  object-fit:cover;
-                  border-radius:10px;
-                "
-              >`
-            : "🛍️"
-        }
-
+        ${image}
       </div>
 
-      <h3>${product.name}</h3>
+      <h3>
+        ${product.name}
+      </h3>
 
       <p class="price">
         ${Number(product.price).toFixed(2)} AZN
@@ -89,32 +92,27 @@ async function loadProducts() {
 
     `;
 
-    const button =
-      card.querySelector(".cart-btn");
 
-    button.addEventListener("click", () => {
+    card
+      .querySelector(".cart-btn")
+      .addEventListener(
+        "click",
+        () => {
 
-      addToCart(
-        product.name,
-        product.price
+          addToCart(
+            product.name,
+            product.price
+          );
+
+        }
       );
 
-    });
 
-    productsContainer.appendChild(card);
+    container.appendChild(card);
 
   });
 
 }
-
-
-// ==========================
-// SƏBƏT
-// ==========================
-
-let cart = JSON.parse(
-  localStorage.getItem("zemu_cart") || "[]"
-);
 
 
 function addToCart(name, price) {
@@ -124,47 +122,46 @@ function addToCart(name, price) {
     price: price
   });
 
+
   localStorage.setItem(
     "zemu_cart",
     JSON.stringify(cart)
   );
 
-  updateCartCount();
+
+  updateCart();
+
 
   alert(
-    `${name} səbətə əlavə edildi!`
+    name +
+    " səbətə əlavə edildi!"
   );
 
 }
 
 
-// ==========================
-// SƏBƏT SAYI
-// ==========================
+function updateCart() {
 
-function updateCartCount() {
-
-  const buttons =
-    document.querySelectorAll(
-      ".header-icons button"
+  const button =
+    document.getElementById(
+      "cartButton"
     );
 
-  if (buttons.length >= 3) {
 
-    buttons[2].textContent =
-      `🛒 ${cart.length}`;
+  if (button) {
+
+    button.textContent =
+      "🛒 " + cart.length;
 
   }
 
 }
 
 
-// ==========================
-// AXTARIŞ
-// ==========================
-
 const searchInput =
-  document.querySelector(".search input");
+  document.getElementById(
+    "searchInput"
+  );
 
 
 if (searchInput) {
@@ -174,7 +171,10 @@ if (searchInput) {
     function () {
 
       const text =
-        this.value.toLowerCase().trim();
+        this.value
+          .toLowerCase()
+          .trim();
+
 
       document
         .querySelectorAll(".product")
@@ -185,6 +185,7 @@ if (searchInput) {
               .querySelector("h3")
               .textContent
               .toLowerCase();
+
 
           product.style.display =
             name.includes(text)
@@ -199,12 +200,10 @@ if (searchInput) {
 }
 
 
-// ==========================
-// ALIŞ-VERİŞ DÜYMƏSİ
-// ==========================
-
 const shopButton =
-  document.querySelector(".shop-btn");
+  document.querySelector(
+    ".shop-btn"
+  );
 
 
 if (shopButton) {
@@ -213,16 +212,11 @@ if (shopButton) {
     "click",
     () => {
 
-      const products =
-        document.querySelector(".products");
-
-      if (products) {
-
-        products.scrollIntoView({
+      document
+        .getElementById("products")
+        .scrollIntoView({
           behavior: "smooth"
         });
-
-      }
 
     }
   );
@@ -230,10 +224,6 @@ if (shopButton) {
 }
 
 
-// ==========================
-// BAŞLA
-// ==========================
-
-updateCartCount();
+updateCart();
 
 loadProducts();
