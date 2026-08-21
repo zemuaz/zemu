@@ -11,28 +11,111 @@ const supabaseClient =
   );
 
 
+// Giriş yoxlaması
+async function checkUser() {
+
+  const {
+    data: {
+      session
+    }
+  } = await supabaseClient.auth.getSession();
+
+
+  // Giriş etməyibsə login səhifəsinə göndər
+  if (!session) {
+
+    window.location.href =
+      "login.html";
+
+    return false;
+  }
+
+
+  // Giriş edibsə mağazanı göstər
+  const loading =
+    document.getElementById("loading");
+
+  const store =
+    document.getElementById("store");
+
+
+  if (loading) {
+    loading.style.display = "none";
+  }
+
+  if (store) {
+    store.style.display = "block";
+  }
+
+
+  return true;
+}
+
+
+// Səbət
 let cart =
   JSON.parse(
     localStorage.getItem("zemu_cart") || "[]"
   );
 
 
+function updateCart() {
+
+  const button =
+    document.getElementById("cartButton");
+
+  if (button) {
+
+    button.textContent =
+      "🛒 " + cart.length;
+
+  }
+
+}
+
+
+function addToCart(name, price) {
+
+  cart.push({
+    name: name,
+    price: price
+  });
+
+
+  localStorage.setItem(
+    "zemu_cart",
+    JSON.stringify(cart)
+  );
+
+
+  updateCart();
+
+
+  alert(
+    name + " səbətə əlavə edildi!"
+  );
+
+}
+
+
+// Məhsulları Supabase-dən gətir
 async function loadProducts() {
 
   const container =
     document.getElementById("products");
 
-  container.innerHTML =
-    "<p class='loading'>Məhsullar yüklənir...</p>";
+  if (!container) return;
 
 
-  const { data, error } =
-    await supabaseClient
-      .from("products")
-      .select("*")
-      .order("id", {
-        ascending: false
-      });
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("products")
+    .select("*")
+    .order("id", {
+      ascending: false
+    });
 
 
   if (error) {
@@ -49,7 +132,7 @@ async function loadProducts() {
   if (!data || data.length === 0) {
 
     container.innerHTML =
-      "<p>Hələ məhsul əlavə edilməyib.</p>";
+      "<p>Hələ məhsul yoxdur.</p>";
 
     return;
   }
@@ -63,13 +146,14 @@ async function loadProducts() {
     const card =
       document.createElement("div");
 
-    card.className = "product";
+    card.className =
+      "product";
 
 
     const image =
       product.image
         ? `<img src="${product.image}" alt="${product.name}">`
-        : `<span style="font-size:60px;">🛍️</span>`;
+        : `<span style="font-size:60px">🛍️</span>`;
 
 
     card.innerHTML = `
@@ -115,49 +199,7 @@ async function loadProducts() {
 }
 
 
-function addToCart(name, price) {
-
-  cart.push({
-    name: name,
-    price: price
-  });
-
-
-  localStorage.setItem(
-    "zemu_cart",
-    JSON.stringify(cart)
-  );
-
-
-  updateCart();
-
-
-  alert(
-    name +
-    " səbətə əlavə edildi!"
-  );
-
-}
-
-
-function updateCart() {
-
-  const button =
-    document.getElementById(
-      "cartButton"
-    );
-
-
-  if (button) {
-
-    button.textContent =
-      "🛒 " + cart.length;
-
-  }
-
-}
-
-
+// Axtarış
 const searchInput =
   document.getElementById(
     "searchInput"
@@ -168,7 +210,7 @@ if (searchInput) {
 
   searchInput.addEventListener(
     "input",
-    function () {
+    function() {
 
       const text =
         this.value
@@ -200,30 +242,21 @@ if (searchInput) {
 }
 
 
-const shopButton =
-  document.querySelector(
-    ".shop-btn"
-  );
+// Başla
+async function start() {
+
+  const loggedIn =
+    await checkUser();
 
 
-if (shopButton) {
+  if (!loggedIn) return;
 
-  shopButton.addEventListener(
-    "click",
-    () => {
 
-      document
-        .getElementById("products")
-        .scrollIntoView({
-          behavior: "smooth"
-        });
+  updateCart();
 
-    }
-  );
+  loadProducts();
 
 }
 
 
-updateCart();
-
-loadProducts();
+start();
