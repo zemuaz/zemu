@@ -1,97 +1,239 @@
-// Zemu.az - əsas JavaScript
+// Zemu.az - Supabase bağlantısı
 
-let cart = [];
+const SUPABASE_URL = "https://cpwlypwlraeudehaookn.supabase.co";
 
-// Səhifə açıldıqda səbəti yaddaşdan götür
-const savedCart = localStorage.getItem("zemu_cart");
+const SUPABASE_KEY =
+  "sb_publishable_BaxB73FACTL2Sht9ob0ywg_qulL8OPE";
 
-if (savedCart) {
-  cart = JSON.parse(savedCart);
-}
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-// Səbəti yadda saxla
-function saveCart() {
-  localStorage.setItem("zemu_cart", JSON.stringify(cart));
-}
 
-// Səbət sayını göstər
-function updateCartCount() {
-  const cartButton = document.querySelector(".header-icons button:nth-child(3)");
+// ==========================
+// MƏHSULLARI GƏTİR
+// ==========================
 
-  if (!cartButton) return;
+async function loadProducts() {
 
-  cartButton.innerHTML = `🛒 ${cart.length}`;
-}
+  const productsContainer =
+    document.querySelector(".products");
 
-// Məhsulu səbətə əlavə et
-function addToCart(name, price) {
-  const product = {
-    id: Date.now(),
-    name: name,
-    price: price
-  };
+  if (!productsContainer) return;
 
-  cart.push(product);
+  productsContainer.innerHTML =
+    "<p>Məhsullar yüklənir...</p>";
 
-  saveCart();
-  updateCartCount();
+  const { data, error } = await supabaseClient
+    .from("products")
+    .select("*")
+    .order("id", { ascending: false });
 
-  alert(`${name} səbətə əlavə edildi!`);
-}
+  if (error) {
 
-// Məhsul düymələrini aktivləşdir
-document.querySelectorAll(".product").forEach((product) => {
+    console.error("Supabase xətası:", error);
 
-  const name = product.querySelector("h3").textContent;
-  const price = product.querySelector(".price").textContent;
-  const button = product.querySelector(".cart-btn");
+    productsContainer.innerHTML =
+      "<p>Məhsullar yüklənərkən xəta baş verdi.</p>";
 
-  button.addEventListener("click", () => {
-    addToCart(name, price);
+    return;
+  }
+
+  if (!data || data.length === 0) {
+
+    productsContainer.innerHTML =
+      "<p>Hələ məhsul yoxdur.</p>";
+
+    return;
+  }
+
+  productsContainer.innerHTML = "";
+
+  data.forEach(product => {
+
+    const card = document.createElement("div");
+
+    card.className = "product";
+
+    card.innerHTML = `
+
+      <div class="product-image">
+
+        ${
+          product.image
+            ? `<img
+                src="${product.image}"
+                alt="${product.name}"
+                style="
+                  width:100%;
+                  height:100%;
+                  object-fit:cover;
+                  border-radius:10px;
+                "
+              >`
+            : "🛍️"
+        }
+
+      </div>
+
+      <h3>${product.name}</h3>
+
+      <p class="price">
+        ${Number(product.price).toFixed(2)} AZN
+      </p>
+
+      <button class="cart-btn">
+        🛒 Səbətə əlavə et
+      </button>
+
+    `;
+
+    const button =
+      card.querySelector(".cart-btn");
+
+    button.addEventListener("click", () => {
+
+      addToCart(
+        product.name,
+        product.price
+      );
+
+    });
+
+    productsContainer.appendChild(card);
+
   });
 
-});
+}
 
-// Axtarış
-const searchInput = document.querySelector(".search input");
+
+// ==========================
+// SƏBƏT
+// ==========================
+
+let cart = JSON.parse(
+  localStorage.getItem("zemu_cart") || "[]"
+);
+
+
+function addToCart(name, price) {
+
+  cart.push({
+    name: name,
+    price: price
+  });
+
+  localStorage.setItem(
+    "zemu_cart",
+    JSON.stringify(cart)
+  );
+
+  updateCartCount();
+
+  alert(
+    `${name} səbətə əlavə edildi!`
+  );
+
+}
+
+
+// ==========================
+// SƏBƏT SAYI
+// ==========================
+
+function updateCartCount() {
+
+  const buttons =
+    document.querySelectorAll(
+      ".header-icons button"
+    );
+
+  if (buttons.length >= 3) {
+
+    buttons[2].textContent =
+      `🛒 ${cart.length}`;
+
+  }
+
+}
+
+
+// ==========================
+// AXTARIŞ
+// ==========================
+
+const searchInput =
+  document.querySelector(".search input");
+
 
 if (searchInput) {
 
-  searchInput.addEventListener("input", function () {
+  searchInput.addEventListener(
+    "input",
+    function () {
 
-    const searchText = this.value.toLowerCase();
+      const text =
+        this.value.toLowerCase().trim();
 
-    document.querySelectorAll(".product").forEach((product) => {
+      document
+        .querySelectorAll(".product")
+        .forEach(product => {
 
-      const productName =
-        product.querySelector("h3").textContent.toLowerCase();
+          const name =
+            product
+              .querySelector("h3")
+              .textContent
+              .toLowerCase();
 
-      if (productName.includes(searchText)) {
-        product.style.display = "";
-      } else {
-        product.style.display = "none";
-      }
+          product.style.display =
+            name.includes(text)
+              ? ""
+              : "none";
 
-    });
+        });
 
-  });
+    }
+  );
 
 }
 
-// "İndi alış-veriş et" düyməsi
-const shopButton = document.querySelector(".shop-btn");
+
+// ==========================
+// ALIŞ-VERİŞ DÜYMƏSİ
+// ==========================
+
+const shopButton =
+  document.querySelector(".shop-btn");
+
 
 if (shopButton) {
 
-  shopButton.addEventListener("click", () => {
+  shopButton.addEventListener(
+    "click",
+    () => {
 
-    document.querySelector(".products").scrollIntoView({
-      behavior: "smooth"
-    });
+      const products =
+        document.querySelector(".products");
 
-  });
+      if (products) {
+
+        products.scrollIntoView({
+          behavior: "smooth"
+        });
+
+      }
+
+    }
+  );
 
 }
 
-// Səhifə yüklənəndə səbət sayını göstər
+
+// ==========================
+// BAŞLA
+// ==========================
+
 updateCartCount();
+
+loadProducts();
