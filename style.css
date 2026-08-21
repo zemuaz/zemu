@@ -1,0 +1,10 @@
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #ffea00; /* Zemu.az-dakı .az hissəsi sarı rəngdə seçilsin */
+    font-size: 16px;
+}
