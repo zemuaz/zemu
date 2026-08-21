@@ -10,9 +10,114 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Zemu.az - Onlayn Alış-Veriş</title>
+  <title>Zemu.az</title>
 
   <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    /* Şəxsi kabinet */
+
+    #accountPanel {
+      display: none;
+
+      position: fixed;
+
+      top: 75px;
+      right: 15px;
+
+      width: 320px;
+
+      max-width: calc(100% - 30px);
+
+      background: white;
+
+      padding: 25px;
+
+      border-radius: 16px;
+
+      box-shadow:
+        0 8px 30px rgba(0,0,0,.25);
+
+      z-index: 999999;
+
+      border: 1px solid #eee;
+    }
+
+
+    #accountPanel h2 {
+      margin-top: 0;
+    }
+
+
+    #accountButton {
+      cursor: pointer !important;
+
+      position: relative;
+
+      z-index: 999999;
+    }
+
+
+    .account-item {
+      width: 100%;
+
+      padding: 13px;
+
+      margin-top: 10px;
+
+      border: 1px solid #ddd;
+
+      border-radius: 9px;
+
+      background: white;
+
+      text-align: left;
+
+      font-size: 15px;
+    }
+
+
+    #logoutButton {
+      width: 100%;
+
+      padding: 13px;
+
+      margin-top: 15px;
+
+      border: 0;
+
+      border-radius: 9px;
+
+      background: #ff4d00;
+
+      color: white;
+
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+
+    .close-account {
+      position: absolute;
+
+      top: 12px;
+      right: 12px;
+
+      border: 0;
+
+      background: #eee;
+
+      width: 30px;
+      height: 30px;
+
+      border-radius: 50%;
+
+      cursor: pointer;
+    }
+
+  </style>
 
 </head>
 
@@ -51,6 +156,7 @@
 
   <header class="header">
 
+
     <div class="logo">
       Zemu.az
     </div>
@@ -73,17 +179,31 @@
 
     <div class="header-icons">
 
-      <button id="accountButton">
+
+      <!-- HESAB DÜYMƏSİ -->
+
+      <button
+        id="accountButton"
+        type="button"
+      >
         👤 Hesab
       </button>
 
-      <button>
+
+      <button
+        type="button"
+      >
         ❤️
       </button>
 
-      <button id="cartButton">
+
+      <button
+        id="cartButton"
+        type="button"
+      >
         🛒 0
       </button>
+
 
     </div>
 
@@ -93,81 +213,76 @@
 
   <!-- ŞƏXSİ KABİNET -->
 
-  <div
-    id="accountPanel"
-    style="
-      display:none;
-      position:fixed;
-      top:75px;
-      right:15px;
-      width:300px;
-      background:white;
-      padding:25px;
-      border-radius:15px;
-      box-shadow:0 5px 25px rgba(0,0,0,.25);
-      z-index:9999;
-    "
-  >
+  <div id="accountPanel">
+
+
+    <button
+      class="close-account"
+      id="closeAccount"
+      type="button"
+    >
+      ×
+    </button>
+
 
     <h2>
-      Şəxsi kabinet
+      👤 Şəxsi kabinet
     </h2>
 
 
     <p>
-      <b>Hesab:</b>
+      <b>Google hesabı</b>
     </p>
 
 
     <p
       id="userEmail"
       style="
+        color:#666;
         word-break:break-word;
-        color:#555;
       "
     >
-      Yüklənir...
+      Hesab yüklənir...
     </p>
 
 
-    <hr>
-
-
     <button
-      id="ordersButton"
-      style="
-        width:100%;
-        padding:12px;
-        margin-bottom:10px;
-        border:1px solid #ddd;
-        border-radius:8px;
-        background:white;
-      "
+      class="account-item"
+      type="button"
     >
       📦 Sifarişlərim
     </button>
 
 
     <button
+      class="account-item"
+      type="button"
+    >
+      ❤️ Seçilmişlər
+    </button>
+
+
+    <button
+      class="account-item"
+      type="button"
+    >
+      📍 Ünvanlarım
+    </button>
+
+
+    <button
       id="logoutButton"
-      style="
-        width:100%;
-        padding:13px;
-        border:0;
-        border-radius:8px;
-        background:#ff4d00;
-        color:white;
-        font-weight:bold;
-      "
+      type="button"
     >
       🚪 Çıxış et
     </button>
+
 
   </div>
 
 
 
-  <!-- MENU -->
+  <!-- MENYU -->
 
   <nav class="menu">
 
@@ -199,21 +314,20 @@
 
   <section class="banner">
 
-    <div>
+    <h1>
+      Zemu.az-a xoş gəlmisiniz!
+    </h1>
 
-      <h1>
-        Zemu.az-a xoş gəlmisiniz!
-      </h1>
+    <p>
+      Sərfəli qiymətlər və minlərlə məhsul.
+    </p>
 
-      <p>
-        Sərfəli qiymətlər və minlərlə məhsul.
-      </p>
-
-      <button class="shop-btn">
-        İndi alış-veriş et
-      </button>
-
-    </div>
+    <button
+      class="shop-btn"
+      type="button"
+    >
+      İndi alış-veriş et
+    </button>
 
   </section>
 
@@ -325,17 +439,9 @@
 
   <section class="container">
 
-    <div class="title-row">
-
-      <h2>
-        Populyar məhsullar
-      </h2>
-
-      <a href="#">
-        Hamısına bax →
-      </a>
-
-    </div>
+    <h2>
+      🛍️ Populyar məhsullar
+    </h2>
 
 
     <div
@@ -378,14 +484,182 @@
 
 <!-- SUPABASE -->
 
-<script
-  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
 </script>
 
 
-<!-- ZEMU APP -->
+<!-- APP -->
 
-<script src="app.js"></script>
+<script src="app.js">
+</script>
+
+
+
+<!-- HESAB SİSTEMİ -->
+
+<script>
+
+document.addEventListener(
+  "DOMContentLoaded",
+  async function () {
+
+
+    const accountButton =
+      document.getElementById(
+        "accountButton"
+      );
+
+
+    const accountPanel =
+      document.getElementById(
+        "accountPanel"
+      );
+
+
+    const closeAccount =
+      document.getElementById(
+        "closeAccount"
+      );
+
+
+    const logoutButton =
+      document.getElementById(
+        "logoutButton"
+      );
+
+
+    const userEmail =
+      document.getElementById(
+        "userEmail"
+      );
+
+
+    /*
+      HESAB DÜYMƏSİ
+    */
+
+    accountButton.addEventListener(
+      "click",
+      function () {
+
+        if (
+          accountPanel.style.display ===
+          "block"
+        ) {
+
+          accountPanel.style.display =
+            "none";
+
+        } else {
+
+          accountPanel.style.display =
+            "block";
+
+        }
+
+      }
+    );
+
+
+    /*
+      BAĞLA
+    */
+
+    closeAccount.addEventListener(
+      "click",
+      function () {
+
+        accountPanel.style.display =
+          "none";
+
+      }
+    );
+
+
+    /*
+      GOOGLE HESABINI GÖSTƏR
+    */
+
+    try {
+
+      const {
+        data: {
+          session
+        }
+      } =
+        await supabaseClient.auth.getSession();
+
+
+      if (
+        session &&
+        session.user
+      ) {
+
+        userEmail.textContent =
+          session.user.email ||
+          "Google istifadəçisi";
+
+      } else {
+
+        userEmail.textContent =
+          "Hesab tapılmadı";
+
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      userEmail.textContent =
+        "Hesab məlumatı alınmadı";
+
+    }
+
+
+    /*
+      ÇIXIŞ
+    */
+
+    logoutButton.addEventListener(
+      "click",
+      async function () {
+
+
+        logoutButton.textContent =
+          "Çıxış edilir...";
+
+
+        const {
+          error
+        } =
+          await supabaseClient.auth.signOut();
+
+
+        if (error) {
+
+          alert(
+            "Çıxış zamanı xəta oldu."
+          );
+
+          logoutButton.textContent =
+            "🚪 Çıxış et";
+
+          return;
+
+        }
+
+
+        window.location.href =
+          "login.html";
+
+      }
+    );
+
+
+  }
+);
+
+</script>
 
 
 </body>
