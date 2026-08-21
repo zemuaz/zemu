@@ -4,182 +4,163 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Zemu.az - Onlayn Alış-Veriş</title>
+  <title>Zemu.az</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="header">
-
-  <div class="logo">
-    Zemu.az
+  <div id="loading">
+    Zemu.az yüklənir...
   </div>
 
-  <div class="search">
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="Məhsul axtar..."
-    >
-    <button>🔍</button>
-  </div>
 
-  <div class="header-icons">
+  <div id="store" style="display:none;">
 
-    <button>👤</button>
+    <header class="header">
 
-    <button>❤️</button>
+      <div class="logo">
+        Zemu.az
+      </div>
 
-    <button id="cartButton">
-      🛒 0
-    </button>
+      <div class="search">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Məhsul axtar..."
+        >
+        <button>🔍</button>
+      </div>
 
-  </div>
+      <div class="header-icons">
 
-</header>
+        <button id="accountButton">
+          👤
+        </button>
 
+        <button>
+          ❤️
+        </button>
 
-<nav class="menu">
+        <button id="cartButton">
+          🛒 0
+        </button>
 
-  <a href="#">Ana səhifə</a>
-  <a href="#">Kateqoriyalar</a>
-  <a href="#">Endirimlər</a>
-  <a href="#">Yeni məhsullar</a>
-  <a href="#">Sifarişlərim</a>
+      </div>
 
-</nav>
-
-
-<section class="banner">
-
-  <div>
-
-    <h1>
-      Zemu.az-a xoş gəlmisiniz!
-    </h1>
-
-    <p>
-      Sərfəli qiymətlər və minlərlə məhsul.
-    </p>
-
-    <button class="shop-btn">
-      İndi alış-veriş et
-    </button>
-
-  </div>
-
-</section>
+    </header>
 
 
-<section class="container">
+    <nav class="menu">
+      <a href="#">Ana səhifə</a>
+      <a href="#">Kateqoriyalar</a>
+      <a href="#">Endirimlər</a>
+      <a href="#">Yeni məhsullar</a>
+      <a href="#">Sifarişlərim</a>
+    </nav>
 
-  <h2>
-    Kateqoriyalar
-  </h2>
 
-  <div class="categories">
+    <section class="banner">
 
-    <div class="category">
-      <img
-        src="https://cdn-icons-png.flaticon.com/128/545/545245.png"
-        alt="Elektronika"
+      <div>
+
+        <h1>
+          Zemu.az-a xoş gəlmisiniz!
+        </h1>
+
+        <p>
+          Sərfəli qiymətlər və minlərlə məhsul.
+        </p>
+
+        <button class="shop-btn">
+          İndi alış-veriş et
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <section class="container">
+
+      <h2>
+        Kateqoriyalar
+      </h2>
+
+      <div class="categories">
+
+        <div class="category">
+          <img src="https://cdn-icons-png.flaticon.com/128/545/545245.png">
+          <span>Elektronika</span>
+        </div>
+
+        <div class="category">
+          <img src="https://cdn-icons-png.flaticon.com/128/892/892458.png">
+          <span>Geyim</span>
+        </div>
+
+        <div class="category">
+          <img src="https://cdn-icons-png.flaticon.com/128/1946/1946436.png">
+          <span>Ev</span>
+        </div>
+
+        <div class="category">
+          <img src="https://cdn-icons-png.flaticon.com/128/2936/2936941.png">
+          <span>Gözəllik</span>
+        </div>
+
+        <div class="category">
+          <img src="https://cdn-icons-png.flaticon.com/128/686/686589.png">
+          <span>Oyun</span>
+        </div>
+
+        <div class="category">
+          <img src="https://cdn-icons-png.flaticon.com/128/3082/3082031.png">
+          <span>Uşaq</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="container">
+
+      <h2>
+        Populyar məhsullar
+      </h2>
+
+      <div
+        class="products"
+        id="products"
       >
-      <span>Elektronika</span>
-    </div>
+        Məhsullar yüklənir...
+      </div>
 
-    <div class="category">
-      <img
-        src="https://cdn-icons-png.flaticon.com/128/892/892458.png"
-        alt="Geyim"
-      >
-      <span>Geyim</span>
-    </div>
+    </section>
 
-    <div class="category">
-      <img
-        src="https://cdn-icons-png.flaticon.com/128/1946/1946436.png"
-        alt="Ev"
-      >
-      <span>Ev</span>
-    </div>
 
-    <div class="category">
-      <img
-        src="https://cdn-icons-png.flaticon.com/128/2936/2936941.png"
-        alt="Gözəllik"
-      >
-      <span>Gözəllik</span>
-    </div>
+    <footer>
 
-    <div class="category">
-      <img
-        src="https://cdn-icons-png.flaticon.com/128/686/686589.png"
-        alt="Oyun"
-      >
-      <span>Oyun</span>
-    </div>
+      <h2>Zemu.az</h2>
 
-    <div class="category">
-      <img
-        src="https://cdn-icons-png.flaticon.com/128/3082/3082031.png"
-        alt="Uşaq"
-      >
-      <span>Uşaq</span>
-    </div>
+      <p>
+        Onlayn alış-verişin yeni ünvanı.
+      </p>
+
+      <p>
+        © 2026 Zemu.az
+      </p>
+
+    </footer>
 
   </div>
 
-</section>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<section class="container">
-
-  <div class="title-row">
-
-    <h2>
-      Populyar məhsullar
-    </h2>
-
-    <a href="#">
-      Hamısına bax →
-    </a>
-
-  </div>
-
-  <div
-    class="products"
-    id="products"
-  >
-
-    <p class="loading">
-      Məhsullar yüklənir...
-    </p>
-
-  </div>
-
-</section>
-
-
-<footer>
-
-  <h2>Zemu.az</h2>
-
-  <p>
-    Onlayn alış-verişin yeni ünvanı.
-  </p>
-
-  <p>
-    © 2026 Zemu.az
-  </p>
-
-</footer>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 
 </body>
 </html>
