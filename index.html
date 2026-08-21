@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zemu.az - Ən Ucuz Onlayn Mağaza</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Yuxarı Axtarış Paneli -->
+    <header class="navbar">
+        <div class="logo">ZEMU<span>.az</span></div>
+        <div class="search-box">
+            <input type="text" placeholder="Zemu-da məhsul, kateqoriya axtar...">
+            <button>Axtar</button>
+        </div>
+        <div class="cart-icon">🛒 <span id="cart-count">0</span></div>
+    </header>
+
+    <!-- Aksiyalar/Banner -->
+    <section class="hero-banner">
+        <h2>🔥 Zemu.az-da 90%-ə qədər Xüsusi Endirimlər!</h2>
+        <p>İlk sifarişinizə özəl pulsuz çatdırılma</p>
+    </section>
+
+    <!-- Məhsullar Şəbəkəsi -->
+    <main class="products-container">
+        <h3>Sizin üçün tövsiyə edilənlər</h3>
+        <div class="product-grid" id="product-list">
+            
+            <!-- Məhsul Kartı 1 -->
+            <div class="product-card">
+                <div class="badge">-70%</div>
+                <img src="https://via.placeholder.com/150" alt="Məhsul">
+                <h4>Simsiz Qulaqlıq Bluetooth 5.3</h4>
+                <div class="price">
+                    <span class="current-price">12.99 AZN</span>
+                    <span class="old-price">43.00 AZN</span>
+                </div>
+                <button onclick="addToCart()">Səbətə At</button>
+            </div>
+
+            <!-- Məhsul Kartı 2 -->
+            <div class="product-card">
+                <div class="badge">-50%</div>
+                <img src="https://via.placeholder.com/150" alt="Məhsul">
+                <h4>Ağıllı Qol Saatı (Smart Watch)</h4>
+                <div class="price">
+                    <span class="current-price">24.50 AZN</span>
+                    <span class="old-price">49.00 AZN</span>
+                </div>
+                <button onclick="addToCart()">Səbətə At</button>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cart-count').innerText = count;
+            alert('Məhsul Zemu səbətinə əlavə olundu!');
+        }
+    </script>
+</body>
+</html>
