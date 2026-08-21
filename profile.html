@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Zemu.az - Profil</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="simple-header">
+
+  <button onclick="history.back()">
+    ←
+  </button>
+
+  <h2>
+    👤 Profil
+  </h2>
+
+</header>
+
+
+<main class="page">
+
+  <div class="profile-card">
+
+    <div class="profile-icon">
+      👤
+    </div>
+
+    <h2>
+      Şəxsi kabinet
+    </h2>
+
+    <p id="email">
+      Hesab yüklənir...
+    </p>
+
+  </div>
+
+
+  <button class="profile-item">
+    📦 Sifarişlərim
+  </button>
+
+  <button class="profile-item">
+    ❤️ Seçilmişlər
+  </button>
+
+  <button class="profile-item">
+    📍 Ünvanlarım
+  </button>
+
+  <button
+    class="logout"
+    onclick="logout()"
+  >
+    🚪 Çıxış et
+  </button>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://cpwlypwlraeudehaookn.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_BaxB73FACTL2Sht9ob0ywg_qulL8OPE";
+
+const supabaseClient =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+async function loadProfile() {
+
+  const {
+    data: {
+      session
+    }
+  } =
+  await supabaseClient.auth.getSession();
+
+
+  if (!session) {
+
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "email"
+  ).textContent =
+    session.user.email ||
+    "Google istifadəçisi";
+
+}
+
+
+async function logout() {
+
+  await supabaseClient.auth.signOut();
+
+  window.location.href =
+    "login.html";
+
+}
+
+
+loadProfile();
+
+</script>
+
+</body>
+    </html>
