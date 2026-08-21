@@ -1,10 +1,340 @@
-.logo {
-    font-size: 22px;
-    font-weight: 900;
-    letter-spacing: 1px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo span {
-    color: #ffea00; /* Zemu.az-dakı .az hissəsi sarı rəngdə seçilsin */
-    font-size: 16px;
+body {
+  font-family: Arial, sans-serif;
+  background: #f6f6f6;
+  color: #222;
+}
+
+/* HEADER */
+.header {
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 15px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff4d00;
+  white-space: nowrap;
+}
+
+.search {
+  flex: 1;
+  display: flex;
+  max-width: 650px;
+}
+
+.search input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 2px solid #ff4d00;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  font-size: 15px;
+}
+
+.search button {
+  width: 55px;
+  border: none;
+  background: #ff4d00;
+  color: white;
+  font-size: 20px;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+}
+
+.header-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.header-icons button {
+  background: white;
+  border: none;
+  font-size: 23px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+/* MENU */
+.menu {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+.menu a:hover {
+  color: #ff4d00;
+}
+
+/* BANNER */
+.banner {
+  margin: 20px auto;
+  max-width: 1200px;
+  min-height: 280px;
+  border-radius: 15px;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(120deg, #ff4d00, #ff7a00);
+  color: white;
+}
+
+.banner h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.banner p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.shop-btn {
+  background: white;
+  color: #ff4d00;
+  border: none;
+  padding: 13px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.container h2 {
+  margin-bottom: 20px;
+}
+
+/* CATEGORIES */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+}
+
+.category {
+  background: white;
+  padding: 25px 10px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 35px;
+  cursor: pointer;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.06);
+  transition: 0.2s;
+}
+
+.category:hover {
+  transform: translateY(-4px);
+}
+
+.category span {
+  display: block;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* PRODUCT TITLE */
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-row a {
+  color: #ff4d00;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* PRODUCTS */
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.product {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: 0.2s;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f2f2;
+  border-radius: 10px;
+  font-size: 75px;
+  margin-bottom: 15px;
+}
+
+.product h3 {
+  margin-bottom: 10px;
+}
+
+.price {
+  color: #ff4d00;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.cart-btn {
+  width: 100%;
+  padding: 11px;
+  background: #ff4d00;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cart-btn:hover {
+  background: #e64200;
+}
+
+/* FOOTER */
+footer {
+  margin-top: 50px;
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 35px 20px;
+}
+
+footer h2 {
+  color: #ff4d00;
+  margin-bottom: 10px;
+}
+
+footer p {
+  margin: 8px;
+  color: #ccc;
+}
+
+/* TELEFON */
+@media (max-width: 768px) {
+
+  .header {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .search {
+    order: 3;
+    width: 100%;
+    max-width: none;
+  }
+
+  .header-icons {
+    margin-left: auto;
+  }
+
+  .menu {
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 20px;
+    white-space: nowrap;
+  }
+
+  .banner {
+    margin: 12px;
+    min-height: 230px;
+    padding: 30px 20px;
+  }
+
+  .banner h1 {
+    font-size: 30px;
+  }
+
+  .banner p {
+    font-size: 15px;
+  }
+
+  .categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .product {
+    padding: 10px;
+  }
+
+  .product-image {
+    height: 140px;
+    font-size: 55px;
+  }
+
+  .price {
+    font-size: 17px;
+  }
+}
+
+/* KİÇİK TELEFON */
+@media (max-width: 400px) {
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .category {
+    padding: 18px 5px;
+    font-size: 28px;
+  }
+
+  .category span {
+    font-size: 12px;
+  }
 }
