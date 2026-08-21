@@ -1,39 +1,526 @@
-<div class="header-menu">
+<!DOCTYPE html>
+<html lang="az">
 
-  <button
-    class="menu-button"
-    type="button"
-    onclick="window.location.href='cart.html';"
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Zemu.az</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div class="logo">
+    Zemu.az
+  </div>
+
+
+  <div class="search">
+
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Məhsul axtar..."
+    >
+
+    <button type="button">
+      Axtar
+    </button>
+
+  </div>
+
+
+  <div class="header-menu">
+
+
+    <button
+      class="menu-button"
+      type="button"
+      onclick="window.location.href='cart.html';"
+    >
+
+      <span>🛒</span>
+
+      <small>Səbət</small>
+
+    </button>
+
+
+    <button
+      class="menu-button"
+      type="button"
+      onclick="window.location.href='orders.html';"
+    >
+
+      <span>📦</span>
+
+      <small>Sifarişlər</small>
+
+    </button>
+
+
+    <button
+      class="menu-button"
+      type="button"
+      onclick="window.location.href='gifts.html';"
+    >
+
+      <span>🎁</span>
+
+      <small>Hədiyyələr</small>
+
+    </button>
+
+
+    <button
+      class="menu-button"
+      type="button"
+      onclick="window.location.href='profile.html';"
+    >
+
+      <span>👤</span>
+
+      <small>Profil</small>
+
+    </button>
+
+
+  </div>
+
+</header>
+
+
+
+<!-- MENYU -->
+
+<nav class="menu">
+
+  <a href="index.html">
+    Ana səhifə
+  </a>
+
+  <a href="#">
+    Kateqoriyalar
+  </a>
+
+  <a href="#">
+    🔥 Endirimlər
+  </a>
+
+  <a href="#">
+    Yeni məhsullar
+  </a>
+
+</nav>
+
+
+
+<!-- BANNER -->
+
+<section class="banner">
+
+  <div>
+
+    <h1>
+      Zemu.az-a xoş gəlmisiniz! 🛍️
+    </h1>
+
+    <p>
+      Minlərlə məhsul • Sərfəli qiymətlər • Sürətli alış-veriş
+    </p>
+
+    <button
+      class="shop-btn"
+      type="button"
+      onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'});"
+    >
+      İndi alış-veriş et
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- KATEQORİYALAR -->
+
+<section class="container">
+
+  <h2>
+    Kateqoriyalar
+  </h2>
+
+
+  <div class="categories">
+
+
+    <div class="category">
+
+      <div class="category-icon">
+        📱
+      </div>
+
+      <b>
+        Elektronika
+      </b>
+
+    </div>
+
+
+    <div class="category">
+
+      <div class="category-icon">
+        👕
+      </div>
+
+      <b>
+        Geyim
+      </b>
+
+    </div>
+
+
+    <div class="category">
+
+      <div class="category-icon">
+        🏠
+      </div>
+
+      <b>
+        Ev
+      </b>
+
+    </div>
+
+
+    <div class="category">
+
+      <div class="category-icon">
+        💄
+      </div>
+
+      <b>
+        Gözəllik
+      </b>
+
+    </div>
+
+
+    <div class="category">
+
+      <div class="category-icon">
+        🎮
+      </div>
+
+      <b>
+        Oyun
+      </b>
+
+    </div>
+
+
+    <div class="category">
+
+      <div class="category-icon">
+        🧸
+      </div>
+
+      <b>
+        Uşaq
+      </b>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- MƏHSULLAR -->
+
+<section class="container">
+
+  <div class="section-title">
+
+    <h2>
+      🔥 Populyar məhsullar
+    </h2>
+
+    <a href="#">
+      Hamısına bax →
+    </a>
+
+  </div>
+
+
+  <div
+    id="products"
+    class="products"
   >
-    <span>🛒</span>
-    <small>Səbət</small>
-  </button>
 
-  <button
-    class="menu-button"
-    type="button"
-    onclick="window.location.href='orders.html';"
-  >
-    <span>📦</span>
-    <small>Sifarişlər</small>
-  </button>
+    <div class="product">
 
-  <button
-    class="menu-button"
-    type="button"
-    onclick="window.location.href='gifts.html';"
-  >
-    <span>🎁</span>
-    <small>Hədiyyələr</small>
-  </button>
+      <div class="product-image">
+        🎧
+      </div>
 
-  <button
-    class="menu-button"
-    type="button"
-    onclick="window.location.href='profile.html';"
-  >
-    <span>👤</span>
-    <small>Profil</small>
-  </button>
+      <h3>
+        Simsiz qulaqcıq
+      </h3>
 
-</div>
+      <p class="price">
+        19.99 AZN
+      </p>
+
+      <button
+        class="cart-btn"
+        onclick="addDemoProduct('Simsiz qulaqcıq',19.99)"
+      >
+        🛒 Səbətə əlavə et
+      </button>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-image">
+        ⌚
+      </div>
+
+      <h3>
+        Smart saat
+      </h3>
+
+      <p class="price">
+        34.99 AZN
+      </p>
+
+      <button
+        class="cart-btn"
+        onclick="addDemoProduct('Smart saat',34.99)"
+      >
+        🛒 Səbətə əlavə et
+      </button>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-image">
+        🎒
+      </div>
+
+      <h3>
+        Gündəlik çanta
+      </h3>
+
+      <p class="price">
+        24.99 AZN
+      </p>
+
+      <button
+        class="cart-btn"
+        onclick="addDemoProduct('Gündəlik çanta',24.99)"
+      >
+        🛒 Səbətə əlavə et
+      </button>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-image">
+        👟
+      </div>
+
+      <h3>
+        İdman ayaqqabısı
+      </h3>
+
+      <p class="price">
+        39.99 AZN
+      </p>
+
+      <button
+        class="cart-btn"
+        onclick="addDemoProduct('İdman ayaqqabısı',39.99)"
+      >
+        🛒 Səbətə əlavə et
+      </button>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- ÜSTÜNLÜKLƏR -->
+
+<section class="advantages">
+
+  <div>
+    🚚
+    <b>Sürətli çatdırılma</b>
+  </div>
+
+  <div>
+    🔒
+    <b>Təhlükəsiz alış-veriş</b>
+  </div>
+
+  <div>
+    💰
+    <b>Sərfəli qiymətlər</b>
+  </div>
+
+  <div>
+    🎁
+    <b>Bonuslar</b>
+  </div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <h2>
+    Zemu.az
+  </h2>
+
+  <p>
+    Onlayn alış-verişin yeni ünvanı.
+  </p>
+
+  <p>
+    © 2026 Zemu.az
+  </p>
+
+</footer>
+
+
+
+<script>
+
+function addDemoProduct(
+  name,
+  price
+) {
+
+
+  let cart =
+    JSON.parse(
+      localStorage.getItem(
+        "zemu_cart"
+      ) || "[]"
+    );
+
+
+  cart.push({
+
+    name: name,
+
+    price: price
+
+  });
+
+
+  localStorage.setItem(
+    "zemu_cart",
+    JSON.stringify(cart)
+  );
+
+
+  alert(
+    name +
+    " səbətə əlavə edildi!"
+  );
+
+}
+
+
+/* AXTARIŞ */
+
+const searchInput =
+  document.getElementById(
+    "searchInput"
+  );
+
+
+searchInput.addEventListener(
+  "input",
+  function () {
+
+
+    const search =
+      this.value
+        .toLowerCase()
+        .trim();
+
+
+    document
+      .querySelectorAll(
+        ".product"
+      )
+      .forEach(
+        function(product) {
+
+
+          const name =
+            product
+              .querySelector("h3")
+              .textContent
+              .toLowerCase();
+
+
+          if (
+            name.includes(search)
+          ) {
+
+            product.style.display =
+              "";
+
+          } else {
+
+            product.style.display =
+              "none";
+
+          }
+
+
+        }
+      );
+
+
+  }
+);
+
+</script>
+
+
+</body>
+
+  </html>
